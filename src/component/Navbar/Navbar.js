@@ -42,7 +42,7 @@ export default () => {
         <div className="nav-links">
           <Link to="/home">Home</Link>
           <Link to="/About">About</Link>
-          <button onClick={logout}>Logout</button>
+          <button className="btn-sm btn-danger" onClick={logout}>Logout</button>
         </div>
       )
     }else{

@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import firebaseConfig from './Config/firebaseConfig'
-import "firebase/auth";
+import firebaseConfig from './config/firebaseConfig'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import {
-  BrowserRouter as Router,
-} from 'react-router-dom';
-
+import 'firebase/auth'
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
+import foodReducer from './reducers/foodReducer'
 
 if( firebase.apps.length === 0 ){
   firebase.initializeApp(firebaseConfig)
@@ -18,11 +20,15 @@ if( firebase.apps.length === 0 ){
 
 export const firestore = firebase.firestore()
 export const auth = firebase.auth()
+export const reducers = combineReducers({food: foodReducer})
+export const store = createStore(reducers, applyMiddleware(logger, thunk))
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

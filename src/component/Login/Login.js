@@ -30,8 +30,8 @@ function Login(){
         <div className="login">
           <h1>Login</h1>
           <form onSubmit={login}>
-            <input type="text" name="userEmail" onChange = {(e) => setEmail(e.target.value)} placeholder="Username" required="required" />
-            <input type="password" name="userPassword" onChange = {(e) => setPassword(e.target.value)} placeholder="Password" required="required" />
+            <input className="" type="text" name="userEmail" onChange = {(e) => setEmail(e.target.value)} placeholder="Username" required="required" />
+            <input className="" type="password" name="userPassword" onChange = {(e) => setPassword(e.target.value)} placeholder="Password" required="required" />
             <button type="submit" className="btn btn-primary btn-block btn-large">Login</button>
           </form>
           <br />

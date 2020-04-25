@@ -1,33 +1,34 @@
 import React , {useState, useEffect} from 'react';
 import {firestore} from './index'
-import Navbar from './Component/Navbar/Navbar'
-import Content from './Component/Content/Content'
-import FoodList from './Component/Food-list/FoodList'
-import Login  from './Component/Login/Login'
-import Signup from './Component/Signup/Signup'
-import Home from './Component/Home/Home'
-import About from './Component/About/About'
-import { Routes, Route, useRoutes } from 'react-router-dom';
+import Navbar from './component/Navbar/Navbar'
+import Content from './component/Content/Content'
+import Login  from './component/Login/Login'
+import Signup from './component/Signup/Signup'
+import Home from './component/Home/Home'
+import About from './component/About/About'
+import Form from './component/Form/Form'
+import { Routes, Route } from 'react-router-dom';
+
 import './App.css'
 
-function App() {
+const App = () => {
 
   const [foods, setFoods] = useState([])
   const [items, setItems] = useState([''])
   const [name, setName] = useState([''])
   const [calories, setCalories] = useState([''])
 
-  const renderFood = () => {
-    return foods.map((food, index) => {
-      return (
-        <FoodList key={index} food={food} deleteFood={deleteFood} />
-      )
-    })
-  }
+  // const renderFood = () => {
+  //   return foods.map((food, index) => {
+  //     return (
+  //       <FoodList key={index} food={food} deleteFood={deleteFood} />
+  //     )
+  //   })
+  // }
 
   useEffect(() => {
-    retrieveFood()
-    retriveItem()
+    // retrieveFood()
+    // retriveItem()
   }, [])
 
   const retrieveFood = () => {
@@ -48,8 +49,8 @@ function App() {
     }else{
       id = foods.length + 1
     }
-    console.log("id: ", id)
-    firestore.collection('Foods').doc(id+'').set({id, name, calories})
+    console.log("id: ", id, foods)
+    // firestore.collection('Foods').doc(id+'').set({id, name, calories})
   }
 
   const deleteFood = (id) => {
@@ -71,13 +72,6 @@ function App() {
       setItems(myItem)
     })
   }
-
-  const renderItem = () => {
-    return items.map( (bag, index) => {
-      // console.log(bag.item)
-      
-    })
-  }
   
   return (
     <div>
@@ -88,6 +82,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/form" element={<Form />} />
       </Routes>
     </div>
   );
@@ -108,3 +103,4 @@ export default App;
       //   รายการอาหารของคุณ
       //   { renderItem() }
       // </div> */}
+
